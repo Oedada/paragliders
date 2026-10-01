@@ -23,11 +23,14 @@ class Vector3[T]:
     def __add__(self, other: T) -> T:
         return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
 
-    def __mul__(self, s: float) -> Vector3:
+    def __mul__(self, s: float | int) -> Vector3:
         return Vector3(self.x * s, self.y * s, self.z * s)
 
-    def __truediv__(self, s: float) -> Vector3:
+    def __truediv__(self, s: float | int) -> Vector3:
         return Vector3(self.x / s, self.y / s, self.z / s)
+
+    def __abs__(self) -> float:
+        return (self.x**2+self.y**2+self.z**2)**0.5
 
 
 class Position(Vector3):
@@ -60,7 +63,7 @@ class Body:
         self.dt = delta_time_milliseconds / 1000
         self.m = mass_kilograms
 
-    def add_force(self, name: str, force: Force) -> None:
+    def set_force(self, name: str, force: Force) -> None:
         self.forces_dict[name] = (force, len(self.forces))
         self.forces.append(force)
 
@@ -69,6 +72,13 @@ class Body:
         del self.forces[name]
 
     def update_velocity(self) -> None:
+        print(self.velocity)
+        speed = abs(self.velocity)
+        drag = self.velocity * (
+            -0.5 * Constants.p * Constants.S * Constants.CD * speed
+        )
+        self.set_force(name="upper", force=Force(y=0.5*Constants.p*Constants.S*Constants.CL*speed))
+        self.set_force(name="drag", force=drag)
         a = sum([f / self.m for f in self.forces], Acceleration(0, 0, 0))
         self.velocity += a * self.dt
 
@@ -78,15 +88,20 @@ class Constants:
     ticks_per_second = 20
     dt = 1000 / ticks_per_second
     m = 80
+    p = 1.225
+    S = 25
+    CL = 0.3
+    CD = 0.15
 
 
 body = Body(
     mass_kilograms=80,
-    start_forces=[Force(y=Constants.g * Constants.m), Force(x=50, z=80)],
+    start_forces=[Force(y=Constants.g * Constants.m)],
+    start_velocity=Velocity(x=1, z=1),
     delta_time_milliseconds=Constants.dt,
 )
 
-position: Position = Position(0, 100, 0)
+position: Position = Position(0, 0, 0)
 
 
 def make_axis(direction, text, length=100):
