@@ -1,4 +1,4 @@
-package gliders.oedada.ru;
+package gliders.oedada.ru.physics;
 
 public class Constants {
     public static float density = 1.225f;
