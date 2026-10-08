@@ -1,5 +1,6 @@
-package gliders.oedada.ru;
+package gliders.oedada.ru.physics;
 
+import gliders.oedada.ru.Constants;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 

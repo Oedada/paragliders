@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
-import gliders.oedada.ru.Body;
 import gliders.oedada.ru.GlideState;
 import gliders.oedada.ru.GliderPayload;
 import gliders.oedada.ru.ModAttachments;
+import gliders.oedada.ru.physics.Body;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;

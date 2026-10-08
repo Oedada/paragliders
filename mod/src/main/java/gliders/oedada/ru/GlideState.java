@@ -1,5 +1,7 @@
 package gliders.oedada.ru;
 
+import gliders.oedada.ru.physics.Body;
+
 public class GlideState {
     public static Body body;
     public static float prevHeading = 0;
