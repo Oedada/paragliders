@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:white_wool",
+        "minecraft:white_wool",
+        "minecraft:white_wool",
+        "minecraft:white_wool",
+        "minecraft:white_wool",
+        "minecraft:white_wool"
+    ],
+    "result": {
+        "id": "gliders:fabric",
+        "count": 1
+    }
+}

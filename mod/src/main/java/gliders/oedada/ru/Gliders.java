@@ -15,13 +15,14 @@ public class Gliders implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModAttachments.init();
+		ModItems.initialize();
 
 		PayloadTypeRegistry.serverboundPlay().register(GliderPayload.TYPE, GliderPayload.CODEC);
 
 		ServerPlayNetworking.registerGlobalReceiver(GliderPayload.TYPE, (payload, context) -> {
-			if (payload.is_gliding()) {
+			if (!payload.is_gliding()) {
 				context.player().resetFallDistance();
-				LOGGER.info("gliding");
+				LOGGER.info("not gliding");
 			}
 		});
 	}
